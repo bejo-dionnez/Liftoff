@@ -48,6 +48,7 @@ def make_new_parent(feature_list, parent, feature_hierarchy):
                 "Parent" in feature.attributes and feature.attributes["Parent"][0] == parent]
     starts, ends = [child.start for child in children], [child.end for child in children]
     ref_parent = get_ref_parent(parent, feature_hierarchy)
+    ref_parent.attributes["original_source"] = ref_parent.source
     target_parent_feature = new_feature.new_feature(ref_parent.id, ref_parent.featuretype, children[0].seqid,
                                                     'Liftoff', children[0].strand, min(starts), max(ends),
                                                     dict(ref_parent.attributes))
